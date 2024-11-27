@@ -1,14 +1,13 @@
 //
-//  ContentView.swift
+//  NListView.swift
 //  Notes
 //
-//  Created by Santiago Mendoza on 25/11/24.
+//  Created by Santiago Mendoza on 27/11/24.
 //
 
 import SwiftUI
 
-struct ContentView: View {
-
+struct NListView: View {
     let cards: [NCard] = [
         NCard(title: "Card 1", text: "Texto del card 1", type: .small),
         NCard(title: "Card 2", text: "Texto del card 2", type: .medium),
@@ -17,10 +16,15 @@ struct ContentView: View {
     ]
 
     var body: some View {
-        NListView()
+        List {
+            ForEach (cards) { card in
+                NCardView(card: card)
+            }
+        }
+        .listStyle(.plain)
     }
 }
 
 #Preview {
-    ContentView()
+    NListView()
 }
