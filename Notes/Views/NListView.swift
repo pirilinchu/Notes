@@ -14,10 +14,12 @@ struct NListView: View {
     @State var showDetails: Bool = false
     @State var selectedCard: NCard?
 
+    var forFavorites: Bool = false
+
     var body: some View {
         NavigationStack {
             List {
-                ForEach (appInfo.cards) { card in
+                ForEach (forFavorites ? appInfo.favorites : appInfo.cards) { card in
                     NCardView(card: card)
                         .onTapGesture {
                             selectedCard = card
@@ -32,17 +34,19 @@ struct NListView: View {
                     showSheet = false
                 }
             }
-            .overlay {
-                VStack {
-                    Spacer()
-                    Button("Create note") {
-                        showSheet = true
-                    }
-                }
-            }
             .navigationDestination(isPresented: $showDetails) {
                 if let selectedCard {
                     NDetailView(card: selectedCard)
+                }
+            }
+            .navigationTitle("Notes")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(Color.cyan.opacity(0.4), for: .navigationBar)
+            .toolbar {
+                Button {
+                    showSheet = true
+                } label: {
+                    Image(systemName: "plus")
                 }
             }
         }

@@ -11,7 +11,16 @@ struct ContentView: View {
     @StateObject var appInfo = AppInfo()
 
     var body: some View {
-        NListView()
+        TabView {
+            NListView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+            NListView(forFavorites: true)
+                .tabItem {
+                    Label("Favorites", systemImage: "heart")
+                }
+        }
             .environmentObject(appInfo)
     }
 }
