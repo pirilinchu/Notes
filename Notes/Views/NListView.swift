@@ -8,25 +8,20 @@
 import SwiftUI
 
 struct NListView: View {
-    let cards: [NCard] = [
-        NCard(title: "Card 1", text: "Texto del card 1", type: .small),
-        NCard(title: "Card 2", text: "Texto del card 2", type: .medium),
-        NCard(title: "Card 3", text: "Texto del card 3", type: .small),
-        NCard(title: "Card 4", text: "Texto del card 4", type: .small),
-    ]
+    @EnvironmentObject var appInfo: AppInfo
 
     @State var showSheet: Bool = false
 
     var body: some View {
         List {
-            ForEach (cards) { card in
+            ForEach (appInfo.cards) { card in
                 NCardView(card: card)
             }
         }
         .listStyle(.plain)
         .sheet(isPresented: $showSheet) {
             NCreateNoteView() { card in
-                print(card)
+                appInfo.createNote(card: card)
                 showSheet = false
             }
         }
@@ -43,4 +38,5 @@ struct NListView: View {
 
 #Preview {
     NListView()
+        .environmentObject(AppInfo())
 }

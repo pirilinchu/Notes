@@ -8,16 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    let cards: [NCard] = [
-        NCard(title: "Card 1", text: "Texto del card 1", type: .small),
-        NCard(title: "Card 2", text: "Texto del card 2", type: .medium),
-        NCard(title: "Card 3", text: "Texto del card 3", type: .small),
-        NCard(title: "Card 4", text: "Texto del card 4", type: .small),
-    ]
+    @StateObject var appInfo = AppInfo()
 
     var body: some View {
         NListView()
+            .environmentObject(appInfo)
     }
 }
 
