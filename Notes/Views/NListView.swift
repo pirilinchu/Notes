@@ -20,7 +20,9 @@ struct NListView: View {
         NavigationStack {
             List {
                 ForEach (forFavorites ? appInfo.favorites : appInfo.cards) { card in
-                    NCardView(card: card)
+                    NCardView(card: card) {
+                        appInfo.toggleFavorite(card: card)
+                    }
                         .onTapGesture {
                             selectedCard = card
                             showDetails = true
