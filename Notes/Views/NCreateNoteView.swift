@@ -17,7 +17,7 @@ struct NCreateNoteView: View {
 
     func onTap() {
         // crear nota
-        let card = NCard(title: title, text: text, type: size)
+        let card = NCard(title: title, text: text, type: size, isFavorite: isFavorite)
 
         print("Esta es tu nueva card: \(card)")
 
